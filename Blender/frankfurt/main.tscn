@@ -1,0 +1,69 @@
+[gd_scene load_steps=14 format=3 uid="uid://ds5bgb7du0ik"]
+
+[ext_resource type="PackedScene" uid="uid://dvfklyffhp3wy" path="res://Pilzhüttte 1.blend" id="1_2necy"]
+[ext_resource type="PackedScene" uid="uid://d1roiegdorbxk" path="res://Pilzhüttte 2.blend" id="2_pxnwy"]
+[ext_resource type="PackedScene" uid="uid://c6ckuiglxu" path="res://Pilzhüttte 3.blend" id="3_yafsx"]
+[ext_resource type="PackedScene" uid="uid://bb4e8aeold7e1" path="res://Wiese.blend" id="4_x3mk0"]
+[ext_resource type="ArrayMesh" uid="uid://cwbscjqfn1xnt" path="res://Wiese.obj" id="5_ivxak"]
+[ext_resource type="Script" path="res://player.gd" id="6_oqyli"]
+
+[sub_resource type="Environment" id="Environment_b6nd4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebrcw"]
+albedo_color = Color(0.94902, 0.831373, 0.933333, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pnx6f"]
+material = SubResource("StandardMaterial3D_ebrcw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jh2qr"]
+albedo_color = Color(0.94938, 0.831716, 0.932829, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa16x"]
+next_pass = SubResource("StandardMaterial3D_jh2qr")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f6qlh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kfnfu"]
+albedo_color = Color(0.94902, 0.831373, 0.933333, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Pilzhüttte 1" parent="." instance=ExtResource("1_2necy")]
+transform = Transform3D(0.598884, 0, -0.800836, 0, 1, 0, 0.800836, 0, 0.598884, 0.0785193, -0.0187056, -4.17243)
+
+[node name="Pilzhüttte 2" parent="." instance=ExtResource("2_pxnwy")]
+transform = Transform3D(-0.373166, 0, -0.927765, 0, 1, 0, 0.927765, 0, -0.373166, 4.70555, -0.0456455, -2.62018)
+
+[node name="Pilzhüttte 3" parent="." instance=ExtResource("3_yafsx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.267859, -0.553594, 1.83187)
+
+[node name="Wiese" parent="." instance=ExtResource("4_x3mk0")]
+transform = Transform3D(16.916, 0, 0, 0, 1, 0, 0, 0, 14.9774, 1.29186, -0.993833, -2.13754)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.445, 0, 0, 0, 0.445, 0, 0, 0, 0.445, 7.44945, 0, 2.95902)
+lod_bias = 0.001
+mesh = ExtResource("5_ivxak")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0932012, 0.973178, 0.210328, -0.320007, -0.229319, 0.919243, 0.94282, 0.0183681, 0.332797, 0, 9.15246, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b6nd4")
+
+[node name="Camera3D" type="Camera3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.65388, 0, 13.3899)
+
+[node name="Player" type="Node3D" parent="."]
+script = ExtResource("6_oqyli")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.70057, 0, 0.936183)
+mesh = SubResource("CapsuleMesh_pnx6f")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_sa16x")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/MeshInstance3D2"]
+transform = Transform3D(-0.13, 0, 0, 0, -0.0117483, 0.129468, 0, -0.129468, -0.0117483, 0.017642, 0.434065, 0.514308)
+mesh = SubResource("CapsuleMesh_f6qlh")
+surface_material_override/0 = SubResource("StandardMaterial3D_kfnfu")

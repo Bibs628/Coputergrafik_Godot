@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=3 uid="uid://parx6wfrv14g"]
+
+[ext_resource type="Script" path="res://character_body_3d.gd" id="1_miv5n"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hluno"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ohrx3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8co7r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7d84k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k0rxp"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_82l7c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nu3cs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3f6en"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xdsr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3pma5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_halop"]
+
+[node name="Szene2" type="Node2D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51306, 3.6445, -4.22912)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/RigidBody3D"]
+mesh = SubResource("SphereMesh_hluno")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/RigidBody3D"]
+shape = SubResource("SphereShape3D_ohrx3")
+
+[node name="Camera3D" type="Camera3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.898939, 0.438073, 0, -0.438073, 0.898939, 0, 2.8237, 8.84261)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.664239, 0.74752, 0, -0.74752, 0.664239, 0, 0, 0)
+
+[node name="Würfel" type="RigidBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.73498, 2.19414)
+mass = 0.009
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Würfel"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+mesh = SubResource("BoxMesh_8co7r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Würfel"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+shape = SubResource("BoxShape3D_7d84k")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+
+[node name="Plane" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.411441, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Plane"]
+transform = Transform3D(20, 0, 0, 0, 0.015, 0, 0, 0, 20, 0, 0, 0)
+shape = SubResource("BoxShape3D_k0rxp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Plane"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_82l7c")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.629215, 0)
+script = ExtResource("1_miv5n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_nu3cs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_3f6en")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="World"]
+physics_interpolation_mode = 2
+transform = Transform3D(2, 0, 0, 0, 0.087345, -0.97383, 0, 0.0486915, 1.7469, 4.69493, 2.44402, -3.19001)
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/RigidBody3D2"]
+physics_interpolation_mode = 2
+auto_translate_mode = 2
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("BoxMesh_0xdsr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/RigidBody3D2"]
+physics_interpolation_mode = 2
+transform = Transform3D(2, 0, 0, 0, 0.1, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_3pma5")
+
+[node name="halbe schwerkraft" type="Area3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.70492, 0, 2.45208)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/halbe schwerkraft"]
+transform = Transform3D(4.885, 0, 0, 0, 4.885, 0, 0, 0, 4.885, 0, 2.08756, -1.5671)
+shape = SubResource("BoxShape3D_halop")

@@ -17,7 +17,7 @@ func _process(delta):
 		position.z += speed * delta
 		print("Down")
 	if Input.is_key_pressed(KEY_LEFT):
-		.z -= rotationspeed * delta
+		position.z -= rotationspeed * delta
 		print("Left")
 	if Input.is_key_pressed(KEY_RIGHT):
 		position.z += rotationspeed * delta
